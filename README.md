@@ -1,3 +1,3 @@
 # maze_robot
 
-A autonomous maze solving robot
+An autonomous maze solving robot
