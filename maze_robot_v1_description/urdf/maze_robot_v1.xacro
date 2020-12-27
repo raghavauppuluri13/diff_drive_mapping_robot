@@ -153,27 +153,6 @@
 
 <link name="base_top_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="-0.05004282189881282 -3.3760863741549227e-17 0.033515838063892314"/>
-    <mass value="0.3965131118741336"/>
-    <inertia ixx="0.000347" ixy="-0.0" ixz="-0.0" iyy="0.00096" iyz="-0.0" izz="0.001306"/>
-  </inertial>
-  <visual>
-    <origin rpy="0 0 0" xyz="-0.05 -0.0 -0.001"/>
-    <geometry>
-      <mesh filename="package://maze_robot_v1_description/meshes/base_top_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin rpy="0 0 0" xyz="-0.05 -0.0 -0.001"/>
-    <geometry>
-      <mesh filename="package://maze_robot_v1_description/meshes/base_top_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="base_top_1">
-  <inertial>
     <origin rpy="0 0 0" xyz="0.04995717810118719 -3.3760863741549227e-17 0.033515838063892314"/>
     <mass value="0.3965131118741336"/>
     <inertia ixx="0.000347" ixy="-0.0" ixz="-0.0" iyy="0.00096" iyz="-0.0" izz="0.001306"/>
@@ -189,27 +168,6 @@
     <origin rpy="0 0 0" xyz="0.05 -0.0 -0.001"/>
     <geometry>
       <mesh filename="package://maze_robot_v1_description/meshes/base_top_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="main_holder_1">
-  <inertial>
-    <origin rpy="0 0 0" xyz="0.003388479947686096 -0.04900000000000126 0.04655652487203829"/>
-    <mass value="0.769483356673395"/>
-    <inertia ixx="0.001253" ixy="-0.0" ixz="-2.5e-05" iyy="0.000469" iyz="-0.0" izz="0.000955"/>
-  </inertial>
-  <visual>
-    <origin rpy="0 0 0" xyz="-0.0841 -0.049 0.016"/>
-    <geometry>
-      <mesh filename="package://maze_robot_v1_description/meshes/main_holder_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin rpy="0 0 0" xyz="-0.0841 -0.049 0.016"/>
-    <geometry>
-      <mesh filename="package://maze_robot_v1_description/meshes/main_holder_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
