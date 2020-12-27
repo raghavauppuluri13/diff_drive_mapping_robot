@@ -12,12 +12,12 @@
   </actuator>
 </transmission>
 
-<transmission name="Rev9_tran">
+<transmission name="Rev19_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Rev9">
+  <joint name="Rev19">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Rev9_actr">
+  <actuator name="Rev19_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
