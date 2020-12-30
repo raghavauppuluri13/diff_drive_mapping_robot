@@ -1,0 +1,327 @@
+<?xml version="1.0" ?>
+<robot name="maze_robot_v1" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find maze_robot_v1_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find maze_robot_v1_description)/urdf/maze_robot_v1.trans" />
+<xacro:include filename="$(find maze_robot_v1_description)/urdf/maze_robot_v1.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-4.2821898812846635e-05 0.0 0.0014841619361076932"/>
+    <mass value="0.3965131118741336"/>
+    <inertia ixx="0.000347" ixy="-0.0" ixz="0.0" iyy="0.00096" iyz="0.0" izz="0.001306"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_motor_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-3.629042322122258e-15 0.08388470607663234 0.01722503518740896"/>
+    <mass value="0.27850052671990655"/>
+    <inertia ixx="2.4e-05" ixy="0.0" ixz="0.0" iyy="0.000125" iyz="-0.0" izz="0.000125"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.0 0.0475 0.003"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/left_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.0 0.0475 0.003"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/left_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_motor_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-3.629042322122258e-15 0.011115293923367658 0.011225035187408958"/>
+    <mass value="0.27850052671990655"/>
+    <inertia ixx="2.4e-05" ixy="-0.0" ixz="0.0" iyy="0.000125" iyz="0.0" izz="0.000125"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.0 0.0475 -0.003"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/right_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.0 0.0475 -0.003"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/right_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-1.856614593209107e-15 -0.014000000000000005 3.469446951953614e-18"/>
+    <mass value="0.7450574842174399"/>
+    <inertia ixx="0.000253" ixy="0.0" ixz="0.0" iyy="0.000409" iyz="-0.0" izz="0.000253"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.0 0.0475 -0.015"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.0 0.0475 -0.015"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="support_front_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.015000000000000003"/>
+    <mass value="0.10048"/>
+    <inertia ixx="1.2e-05" ixy="-0.0" ixz="0.0" iyy="1.2e-05" iyz="0.0" izz="7e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.05 -0.0 -0.003"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/support_front_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.05 -0.0 -0.003"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/support_front_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="support_back_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-6.938893903907228e-18 0.0 0.015000000000000003"/>
+    <mass value="0.10048"/>
+    <inertia ixx="1.2e-05" ixy="-0.0" ixz="-0.0" iyy="1.2e-05" iyz="0.0" izz="7e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.05 -0.0 -0.003"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/support_back_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.05 -0.0 -0.003"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/support_back_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="base_top_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.05004282189881282 -3.3760863741549227e-17 0.033515838063892314"/>
+    <mass value="0.3965131118741336"/>
+    <inertia ixx="0.000347" ixy="-0.0" ixz="-0.0" iyy="0.00096" iyz="-0.0" izz="0.001306"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.05 -0.0 -0.001"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/base_top_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.05 -0.0 -0.001"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/base_top_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="base_top_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.04995717810118719 -3.3760863741549227e-17 0.033515838063892314"/>
+    <mass value="0.3965131118741336"/>
+    <inertia ixx="0.000347" ixy="-0.0" ixz="-0.0" iyy="0.00096" iyz="-0.0" izz="0.001306"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.05 -0.0 -0.001"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/base_top_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.05 -0.0 -0.001"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/base_top_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="main_holder_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.003388479947686096 -0.04900000000000126 0.04655652487203829"/>
+    <mass value="0.769483356673395"/>
+    <inertia ixx="0.001253" ixy="-0.0" ixz="-2.5e-05" iyy="0.000469" iyz="-0.0" izz="0.000955"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.0841 -0.049 0.016"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/main_holder_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.0841 -0.049 0.016"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/main_holder_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="main_holder_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.10658847994768608 -0.04900000000000126 0.04655652487203829"/>
+    <mass value="0.769483356673395"/>
+    <inertia ixx="0.001253" ixy="-0.0" ixz="-2.5e-05" iyy="0.000469" iyz="-0.0" izz="0.000955"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.0191 -0.049 0.016"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/main_holder_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.0191 -0.049 0.016"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/main_holder_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="iphone_8_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.129985357923112 0.000800347795514139 -0.00701093848233085"/>
+    <mass value="0.5113284957671469"/>
+    <inertia ixx="0.000967" ixy="-0.0" ixz="-0.0" iyy="0.000185" iyz="-0.0" izz="0.000786"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.02998 0.0 -0.056"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/iphone_8_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.02998 0.0 -0.056"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/iphone_8_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-1.856614593209107e-15 0.137 3.469446951953614e-18"/>
+    <mass value="0.7450574842174399"/>
+    <inertia ixx="0.000253" ixy="0.0" ixz="0.0" iyy="0.000409" iyz="-0.0" izz="0.000253"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.0 0.0755 -0.015"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.0 0.0755 -0.015"/>
+    <geometry>
+      <mesh filename="package://maze_robot_v1_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rigid3" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 -0.0475 -0.003"/>
+  <parent link="base_link"/>
+  <child link="left_motor_1"/>
+</joint>
+
+<joint name="Rigid4" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 -0.0475 0.003"/>
+  <parent link="base_link"/>
+  <child link="right_motor_1"/>
+</joint>
+
+<joint name="Rev8" type="continuous">
+  <origin rpy="0 0 0" xyz="0.0 0.0 0.012"/>
+  <parent link="right_motor_1"/>
+  <child link="right_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Rigid10" type="fixed">
+  <origin rpy="0 0 0" xyz="0.05 0.0 0.003"/>
+  <parent link="base_link"/>
+  <child link="support_front_1"/>
+</joint>
+
+<joint name="Rigid11" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.05 0.0 0.003"/>
+  <parent link="base_link"/>
+  <child link="support_back_1"/>
+</joint>
+
+<joint name="Rigid14" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.1 0.0 -0.002"/>
+  <parent link="support_front_1"/>
+  <child link="base_top_1"/>
+</joint>
+
+<joint name="Rigid15" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 0.0 -0.002"/>
+  <parent link="support_back_1"/>
+  <child link="base_top_1"/>
+</joint>
+
+<joint name="Rigid16" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.0191 0.049 -0.016"/>
+  <parent link="base_link"/>
+  <child link="main_holder_1"/>
+</joint>
+
+<joint name="Rigid17" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.0191 0.049 -0.016"/>
+  <parent link="base_link"/>
+  <child link="main_holder_1"/>
+</joint>
+
+<joint name="Rigid18" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.01088 -0.049 0.072"/>
+  <parent link="main_holder_1"/>
+  <child link="iphone_8_1"/>
+</joint>
+
+<joint name="Rev19" type="continuous">
+  <origin rpy="0 0 0" xyz="0.0 -0.028 0.018"/>
+  <parent link="left_motor_1"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+</robot>
