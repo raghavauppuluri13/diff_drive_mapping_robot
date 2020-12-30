@@ -1,10 +1,5 @@
 <launch>
   <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" > 
     <arg name="port" default="9090" />
-    <arg name="address" default="" />
-    <arg name="ssl" default="true" />
-    <arg name="certfile" default="/home/arc/ssl/server.pem" />
-    <arg name="keyfile" default="/home/arc/ssl/server.key" />
-    <arg name="authenticate" default="false" />
   </include>
 </launch>

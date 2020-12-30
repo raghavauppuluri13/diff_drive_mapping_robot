@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(dirname)/bridge.launch" />
+  <node name="keyboard_control" pkg="maze_robot" type="teleop_twist_keyboard" respawn="true"/>
+</launch>

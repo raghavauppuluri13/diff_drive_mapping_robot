@@ -1,0 +1,149 @@
+/* 
+This is a test sketch for the Adafruit assembled Motor Shield for Arduino v2
+It won't work with v1.x motor shields! Only for the v2's with built in PWM
+control
+For use with the Adafruit Motor Shield v2 
+---->	http://www.adafruit.com/products/1438
+*/
+
+#include <Wire.h>
+#include <Adafruit_MotorShield.h>
+#include <math.h>
+
+#define left_enc_PIN 2
+#define right_enc_PIN 3
+
+void incLeftTicks();
+void incRightTicks();
+float calculateAngularSpeed(volatile unsigned long*);
+void controlMotorSpeed(float, float, uint8_t*, Adafruit_DCMotor*);
+
+// Create the motor shield object with the default I2C address
+Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
+
+Adafruit_DCMotor *leftMotor = AFMS.getMotor(2);
+
+Adafruit_DCMotor *rightMotor = AFMS.getMotor(1);
+
+// CONSTANTS
+const byte total_ticks = 28;
+const float motor_delay = 10; // ms delay for motor to speed up
+const float delta_t = 100.0; // ms between speed measurements
+const float wheel_rad = 3.3; // mm
+const float target_speed = 45.0; // cm/s
+
+//   PD Controller
+const float Kp = 0.15;
+const float Ki = 0.00;
+const float Kd = 0.00;
+float err = 0;
+float err_sum = 0;
+
+// GLOBALS
+  // General
+  int max_PWM = 125; // Max PWM for 3-6V rated motors
+
+  // Right motor
+volatile unsigned long rt_tick_ct = 0; // tick count for right wheel
+uint8_t rt_dir = FORWARD; // Direction of rotation for right wheel
+uint8_t rt_PWM = 0;
+
+  // Left motor
+volatile unsigned long lt_tick_ct = 0; // tick count for left wheel
+uint8_t lt_dir = FORWARD; // Direction of rotation left wheel
+uint8_t lt_PWM = 0;
+
+void setup() {
+  Serial.begin(9600);           // set up Serial library at 9600 bps
+  Serial.println("Encoder Test!");
+  
+  pinMode(left_enc_PIN, INPUT_PULLUP);
+  pinMode(right_enc_PIN, INPUT_PULLUP);
+  
+  AFMS.begin();  // create with the default frequency 1.6KHz
+
+  // Set the speed to start, from 0 (off) to 255 (max speed)
+  leftMotor->setSpeed(lt_PWM);
+  leftMotor->run(lt_dir);
+  // turn on motor
+  leftMotor->run(RELEASE);
+  
+  // Set the speed to start, from 0 (off) to 255 (max speed)
+  rightMotor->setSpeed(rt_PWM);
+  rightMotor->run(rt_dir);
+  // turn on motor
+  rightMotor->run(RELEASE);
+
+  attachInterrupt(digitalPinToInterrupt(left_enc_PIN), incLeftTicks, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(right_enc_PIN), incRightTicks, CHANGE);
+}
+
+void loop() { 
+  float lt_curr_speed = calculateAngularSpeed(&lt_tick_ct);
+  float rt_curr_speed = calculateAngularSpeed(&rt_tick_ct);
+
+  rightMotor->run(rt_dir);
+  leftMotor->run(lt_dir);
+
+  controlMotorSpeed(target_speed, lt_curr_speed, &lt_PWM, leftMotor);
+ // controlMotorSpeed(target_speed, rt_curr_speed, &rt_PWM, rightMotor);
+  
+  Serial.print("Left Motor Speed: ");
+  Serial.println(lt_curr_speed);
+  // Serial.print("Right Motor Speed: ");
+  // Serial.println(rt_curr_speed);
+}
+
+void controlMotorSpeed(float target_speed, float curr_speed, uint8_t *PWM, Adafruit_DCMotor *motor)
+{
+  float P; // Proportional term
+  float I; // Integral term
+  float D; // Derivative term
+  float prev_err;
+  
+  prev_err = err;
+  err = target_speed - curr_speed;
+  
+  err_sum += err;
+
+  P = Kp * err;
+  I = Ki * err_sum;
+  D = Kd * ((err - prev_err) / (motor_delay + delta_t));
+  
+  Serial.print("P-term: ");
+  Serial.println(P);
+
+  Serial.print("I-term: ");
+  Serial.println(I);
+
+  Serial.print("D-term: ");
+  Serial.println(D);
+ 
+  *PWM = *PWM + P + I + D;
+  *PWM = *PWM % max_PWM;
+  
+  Serial.print("PWM: ");
+  Serial.println(*PWM);
+  
+  motor->setSpeed(*PWM);
+  delay(motor_delay);
+}
+
+float calculateAngularSpeed(volatile unsigned long *tick_ct){
+  int init_tick_ct;
+  int final_tick_ct;
+
+  init_tick_ct = *tick_ct;
+  delay(delta_t);
+  final_tick_ct = *tick_ct;
+
+  return ((double) final_tick_ct - init_tick_ct) / total_ticks * 2 * M_PI / (delta_t / 1000);
+}
+
+void incLeftTicks() {
+  lt_tick_ct++;
+}
+
+void incRightTicks() { 
+  rt_tick_ct++;
+}
