@@ -5,6 +5,7 @@
 #include <geometry_msgs/Twist.h>
 #include <std_msgs/Float64.h>
 #include <maze_robot/MazeRobotState.h>
+#include <PID_v1.h>
 
 #define left_enc_PIN 2
 #define right_enc_PIN 3
@@ -17,7 +18,7 @@
 void incLeftTicks();
 void incRightTicks();
 double calculateAngularSpeed(volatile unsigned long*);
-void controlMotor(float, float, uint8_t*, Adafruit_DCMotor*);
+//void controlMotor(float, float, uint8_t*, Adafruit_DCMotor*);
 void print_fl(float);
 
 // ROS setup
@@ -35,13 +36,14 @@ Adafruit_DCMotor *rightMotor = AFMS.getMotor(1);
 
 const float target_vel = 45.0; // cm/s
 
-//   PID Controller
+/*   PID Controller
 const float Kp = 0.15;
 const float Ki = 0.02;
 const float Kd = 0.02;
 const float I_err_range = 5.0;
 float err = 0;
 float err_sum = 0;
+*/
 
 // GLOBALS
 
@@ -55,7 +57,7 @@ volatile unsigned long lt_tick_ct = 0; // tick count for left wheel
 uint8_t lt_dir = FORWARD; // Direction of rotation left wheel
 uint8_t lt_PWM = 0;
 
-// Controls motor using PID control
+/* Controls motor using PID control
 void controlMotor(float target_vel, float curr_speed, uint8_t *PWM, Adafruit_DCMotor *motor)
 {
   float P; // Proportional term
@@ -108,6 +110,7 @@ void controlMotor(float target_vel, float curr_speed, uint8_t *PWM, Adafruit_DCM
   motor->setSpeed(*PWM);
   delay(MOTOR_DELAY);
 }
+*/
 
 // Calculates angular speed in rad/s
 double calculateAngularSpeed(volatile unsigned long *tick_ct){
