@@ -8,8 +8,10 @@ project(maze_robot)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED
-  COMPONENTS message_generation std_msgs
+  COMPONENTS roscpp message_generation std_msgs
 )
+
+include_directories(include ${catkin_INCLUDE_DIRS} ${PROJECT_SOURCE_DIR}/lib)
 
 ## Generate messages in the 'msg' folder
 add_message_files(FILES
@@ -22,15 +24,20 @@ generate_messages(DEPENDENCIES
 )
 
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES maze_robot
-  CATKIN_DEPENDS message_runtime 
+	INCLUDE_DIRS include
+	LIBRARIES ${PROJECT_NAME}
+  CATKIN_DEPENDS message_runtime roscpp
 #  DEPENDS system_lib
 )
 
+add_executable(motor_vel_pub src/motor_control/Encoder/motor_vel_pub.cpp)
+
+target_link_libraries(motor_vel_pub ${catkin_LIBRARIES} -lwiringPi -lm -lpthread -lcrypt -lrt)
+
+add_dependencies(motor_vel_pub ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 # Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
-   keyboard_control/teleop_twist_keyboard
+   src/keyboard_control/teleop_twist_keyboard
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
